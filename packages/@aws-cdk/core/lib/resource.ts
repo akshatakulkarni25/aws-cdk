@@ -69,7 +69,7 @@ export interface IResource extends IConstruct {
    * The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
    * account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
    */
-  applyRemovalPolicy(policy: RemovalPolicy, options:RemovalPolicyOptions): void;
+  applyRemovalPolicy(policy: RemovalPolicy, options?:RemovalPolicyOptions): void;
 }
 
 /**
@@ -228,7 +228,7 @@ export abstract class Resource extends Construct implements IResource {
    * The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
    * account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
    */
-  public applyRemovalPolicy(policy: RemovalPolicy, options:RemovalPolicyOptions) {
+  public applyRemovalPolicy(policy: RemovalPolicy, options?:RemovalPolicyOptions) {
     const child = this.node.defaultChild;
     if (!child || !CfnResource.isCfnResource(child)) {
       throw new Error('Cannot apply RemovalPolicy: no child or not a CfnResource. Apply the removal policy on the CfnResource directly.');
